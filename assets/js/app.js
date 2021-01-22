@@ -69,14 +69,33 @@ d3.csv("assets/data/data.csv").then(function(stateData){
     var labels = chart.selectAll(null).data(dataState).enter().append("text");
     //add text and values to circle labels
     labels
-        .attr("x", function(a){
+        .attr("x", function(d){
             return xLinearScale(d.Poverty);
         })
-        .attr("y", function(a){
+        .attr("y", function(d){
             return yLinearScale(d.Healthcare);
         })
-        .text(function(a){
+        .text(function(d){
             return d.abbr;
         })
+        .attr("font-family", "times-new-roman")
+        .attr("font-size", "8px")
+        .attr("text-ancher", "left")
+        .attr("fill", "black");
+
+    // set up tool tip variable and create tooltip chart
+    var Tip = d3.tip()
+    .attr("class", "tooltil")
+    .offset([40,60])
+    .html(function(a){
+        return(`${a.state}<br>Poverty (%): ${d.poverty}<br>Healthcare (%): ${d.Healthcare}`);
+
+    });
+
+    chart.call(Tip);
+
+    //create event listener to display and hide tooltip
+
+
 
 })
