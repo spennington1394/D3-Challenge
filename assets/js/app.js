@@ -21,7 +21,7 @@ var svg = d3.select("#scatter")
     .attr("height", svgHeight);
 
 //append svg group to hold chart
-var chart = svg.append("g")
+var chart = svg.append("graph")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // import data
@@ -47,4 +47,7 @@ d3.csv("assets/data/data.csv").then(function(stateData){
     var axisBottom = d3.axisBottom(xLinearScale);
     var axisLeft = d3.axisLeft(yLinearScale);
 
+    //append axis to chart var 
+    chart.append("graph")
+    .attr
 })
