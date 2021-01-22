@@ -26,21 +26,21 @@ var chart = svg.append("graph")
 
 // import data
 
-d3.csv("assets/data/data.csv").then(function(stateData){
+d3.csv("assets/data/data.csv").then(function(stateData) {
 
     //covert data for poverty and healthcare
-    dataState.forEach(funciton(data){
-        data.Poverty = +data.Poverty;
-        data.Healthcare = +data.Healthcare;
+    stateData.forEach(funciton(data){
+        data.poverty = +data.poverty,
+        data.healthcare = +data.healthcare,
     });
 
     //scale for x and y linear scale
     var xLinearScale = d3.scaleLinear()
-    .domain([8, d3.max(dataState, d => d.Poverty)])
+    .domain([8, d3.max(stateData, d => d.poverty)])
     .range([5, width]);
 
     var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(dataState, d => d.Healthcare)])
+    .domain([0, d3.max(stateData, d => d.healthcare)])
     .range([height, 0]);
 
     //left and bottom axis functions with x and y LinearScale var  
@@ -57,23 +57,23 @@ d3.csv("assets/data/data.csv").then(function(stateData){
 
     //create circles for the scatter chart
     var circles = char.selectAll("circle")
-    .data(dataState)
+    .data(stateData)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.Poverty))
-    attr("cy", d => yLinearScale(d.Healthcare))
+    .attr("cx", d => xLinearScale(d.poverty))
+    attr("cy", d => yLinearScale(d.healthcare))
     .attr("radius", "20")
     .attr("fill", "blue")
     attr("opacity", "0.5");
 
-    var labels = chart.selectAll(null).data(dataState).enter().append("text");
+    var labels = chart.selectAll(null).data(stateData).enter().append("text");
     //add text and values to circle labels
     labels
         .attr("x", function(d){
-            return xLinearScale(d.Poverty);
+            return xLinearScale(d.poverty);
         })
         .attr("y", function(d){
-            return yLinearScale(d.Healthcare);
+            return yLinearScale(d.healthcare);
         })
         .text(function(d){
             return d.abbr;
@@ -88,14 +88,34 @@ d3.csv("assets/data/data.csv").then(function(stateData){
     .attr("class", "tooltil")
     .offset([40,60])
     .html(function(a){
-        return(`${a.state}<br>Poverty (%): ${d.poverty}<br>Healthcare (%): ${d.Healthcare}`);
+        return(`${a.state}<br>Poverty (%): ${d.poverty}<br>Healthcare (%): ${d.healthcare}`);
 
     });
 
     chart.call(Tip);
 
     //create event listener to display and hide tooltip
+    circlesGroup.on('click', function(data) {
+        toolTip.show(data, this);
+      })
+      .on("mouseout", function(data, index) {
+        toolTip.hide(data);
+      });
+      // Create axes labels
+      chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 50)
+        .attr("x", 0 - (height/ 1.5))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Lacks Healthcare (%)");
+  
+      chartGroup.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+        .attr("class", "axisText")
+        .text("In Poverty (%)");
+    }).catch(function(error) {
+      console.log(error);
 
 
-
-})
+});
