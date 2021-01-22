@@ -61,10 +61,10 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
-    attr("cy", d => yLinearScale(d.healthcare))
+    .attr("cy", d => yLinearScale(d.healthcare))
     .attr("radius", "20")
     .attr("fill", "blue")
-    attr("opacity", "0.5");
+    .attr("opacity", "0.5");
 
     var labels = chart.selectAll(null).data(stateData).enter().append("text");
     //add text and values to circle labels
