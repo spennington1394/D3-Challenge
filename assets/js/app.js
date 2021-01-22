@@ -96,13 +96,13 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
 
     //create event listener to display and hide tooltip
     circlesGroup.on('click', function(data) {
-        toolTip.show(data, this);
+        Tip.show(data, this);
       })
       .on("mouseout", function(data, index) {
-        toolTip.hide(data);
+        Tip.hide(data);
       });
       // Create axes labels
-      chartGroup.append("text")
+      chart.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 50)
         .attr("x", 0 - (height/ 1.5))
@@ -110,7 +110,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
         .attr("class", "axisText")
         .text("Lacks Healthcare (%)");
   
-      chartGroup.append("text")
+      chart.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
         .text("In Poverty (%)");
