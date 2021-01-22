@@ -67,8 +67,16 @@ d3.csv("assets/data/data.csv").then(function(stateData){
     attr("opacity", "0.5");
 
     var labels = chart.selectAll(null).data(dataState).enter().append("text");
-
+    //add text and values to circle labels
     labels
-        .attr("x")
+        .attr("x", function(a){
+            return xLinearScale(d.Poverty);
+        })
+        .attr("y", function(a){
+            return yLinearScale(d.Healthcare);
+        })
+        .text(function(a){
+            return d.abbr;
+        })
 
 })
