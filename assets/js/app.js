@@ -43,7 +43,7 @@ d3.csv("assets/data/data.csv").then(function(stateData){
     .domain([0, d3.max(dataState, d => d.Healthcare)])
     .range([height, 0]);
 
-    //left and bottom axis functions with x and y LinearScale var plugged in  
+    //left and bottom axis functions with x and y LinearScale var  
     var axisBottom = d3.axisBottom(xLinearScale);
     var axisLeft = d3.axisLeft(yLinearScale);
 
