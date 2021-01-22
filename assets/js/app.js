@@ -56,7 +56,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .call(axisLeft);
 
     //create circles for the scatter chart
-    var circles = char.selectAll("circle")
+    var circles = chart.selectAll("circle")
     .data(stateData)
     .enter()
     .append("circle")
@@ -118,4 +118,4 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
       console.log(error);
 
 
-});
+        });
