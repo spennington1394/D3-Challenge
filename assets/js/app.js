@@ -3,9 +3,9 @@ var svgWidth = 900;
 var svgHeight = 450;
 
 var margin = {
-    top: 30,
-    right: 50,
-    bottom: 90,
+    top: 20,
+    right: 40,
+    bottom: 80,
     left: 100
 };
 
@@ -29,7 +29,7 @@ var chart = svg.append("graph")
 d3.csv("assets/data/data.csv").then(function(stateData) {
 
     //covert data for poverty and healthcare
-    stateData.forEach(funciton(data){
+    stateData.forEach(function(data) {
         data.poverty = +data.poverty,
         data.healthcare = +data.healthcare,
     });
