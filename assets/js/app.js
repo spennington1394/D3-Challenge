@@ -49,5 +49,26 @@ d3.csv("assets/data/data.csv").then(function(stateData){
 
     //append axis to chart var 
     chart.append("graph")
-    .attr
+    .attr("transform", `translate(0, ${height})`)
+    .call(axisBottom);
+
+    chart.append("graph")
+    .call(axisLeft);
+
+    //create circles for the scatter chart
+    var circles = char.selectAll("circle")
+    .data(dataState)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.Poverty))
+    attr("cy", d => yLinearScale(d.Healthcare))
+    .attr("radius", "20")
+    .attr("fill", "blue")
+    attr("opacity", "0.5");
+
+    var labels = chart.selectAll(null).data(dataState).enter().append("text");
+
+    labels
+        .attr("x")
+
 })
