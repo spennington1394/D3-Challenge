@@ -30,8 +30,8 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
 
     //covert data for poverty and healthcare
     stateData.forEach(function(data) {
-        data.poverty = +data.poverty,
-        data.healthcare = +data.healthcare,
+        data.poverty = +data.poverty;
+        data.healthcare = +data.healthcare;
     });
 
     //scale for x and y linear scale
