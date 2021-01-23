@@ -15,13 +15,15 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom 
 
 //create svg wrapper with index.html tag
-var svg = d3.select("#scatter")
+var svg = d3
+    .select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
 //append svg group to hold chart
-var chart = svg.append("g")
+var chart = svg
+    .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // import data
@@ -48,11 +50,13 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     var axisLeft = d3.axisLeft(yLinearScale);
 
     //append axis to chart var 
-    chart.append("g")
+    chart
+    .append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(axisBottom);
 
-    chart.append("g")
+    chart
+    .append("g")
     .call(axisLeft);
 
     //create circles for the scatter chart
@@ -62,9 +66,9 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("radius", "20")
+    .attr("r", "15")
     .attr("fill", "blue")
-    .attr("opacity", "1.5");
+    .attr("opacity", "0.5");
 
     var labels = chart.selectAll(null).data(stateData).enter().append("text");
     //add text and values to circle labels
