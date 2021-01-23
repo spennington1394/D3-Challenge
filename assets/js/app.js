@@ -21,7 +21,7 @@ var svg = d3.select("#scatter")
     .attr("height", svgHeight);
 
 //append svg group to hold chart
-var chart = svg.append("graph")
+var chart = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // import data
@@ -48,11 +48,11 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     var axisLeft = d3.axisLeft(yLinearScale);
 
     //append axis to chart var 
-    chart.append("graph")
+    chart.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(axisBottom);
 
-    chart.append("graph")
+    chart.append("g")
     .call(axisLeft);
 
     //create circles for the scatter chart
@@ -64,7 +64,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("radius", "20")
     .attr("fill", "blue")
-    .attr("opacity", "0.5");
+    .attr("opacity", "1.5");
 
     var labels = chart.selectAll(null).data(stateData).enter().append("text");
     //add text and values to circle labels
